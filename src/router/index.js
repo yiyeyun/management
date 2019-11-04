@@ -15,8 +15,16 @@ export default new Router({
         {
           path: '',
           component: () => import('@/views/home/default')
+        },
+        {
+          path: '/model-manage',
+          component: () => import('@/views/model-manage')
+        },
+        {
+          path: '/order-manage',
+          component: () => import('@/views/order-manage')
         }
       ]
-    },
+    }
   ]
 })

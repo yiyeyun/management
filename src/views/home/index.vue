@@ -16,31 +16,31 @@
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-goods" />
-            <span>商品管理</span>
+            <span>模版管理</span>
           </template>
-          <el-menu-item index="/goods-list">商品列表</el-menu-item>
+          <el-menu-item index="/model-manage">模版管理</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-menu" />
-            <span>提货券管理</span>
-          </template>
-          <el-menu-item index="/voucher-list">提货券列表</el-menu-item>
-        </el-submenu>
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-tickets" />
             <span>订单管理</span>
           </template>
-          <el-menu-item index="3-1">订单管理</el-menu-item>
+          <el-menu-item index="/order-manage">订单管理</el-menu-item>
         </el-submenu>
-        <el-submenu index="4">
-          <template slot="title">
-            <i class="el-icon-tickets" />
-            <span>商家管理</span>
-          </template>
-          <el-menu-item index="/address">地址管理</el-menu-item>
-        </el-submenu>
+        <!--<el-submenu index="3">-->
+          <!--<template slot="title">-->
+            <!--<i class="el-icon-tickets" />-->
+            <!--<span>订单管理</span>-->
+          <!--</template>-->
+          <!--<el-menu-item index="3-1">订单管理</el-menu-item>-->
+        <!--</el-submenu>-->
+        <!--<el-submenu index="4">-->
+          <!--<template slot="title">-->
+            <!--<i class="el-icon-tickets" />-->
+            <!--<span>商家管理</span>-->
+          <!--</template>-->
+          <!--<el-menu-item index="/address">地址管理</el-menu-item>-->
+        <!--</el-submenu>-->
       </el-menu>
     </div>
 
