@@ -10,7 +10,7 @@
     </div>
     <div class="flex align-center">
       <!--<div class="avatar">{{ userInfo.storeName ? userInfo.storeName[0] : '' }}</div>-->
-      <div class="font-14-999 mr20">您好！{{ userInfo.storeName }}</div>
+      <!--<div class="font-14-999 mr20">您好！{{ userInfo.storeName }}</div>-->
       <div class="fa fa-sign-out" @click="logout" />
     </div>
   </div>
@@ -20,9 +20,6 @@
 import {
   removeToken
 } from '../../utils/auth'
-import {
-  getUserInfo
-} from '../../api/login'
 
 export default {
   name: 'Header',
@@ -36,20 +33,12 @@ export default {
       userInfo: {}
     }
   },
-  mounted() {
-    this.getUserInfo()
-  },
+
   methods: {
     changeMenuStatus() {
       this.$emit('onchange')
     },
-    getUserInfo() {
-      getUserInfo()
-        .then(res => {
-          console.log(res)
-          this.userInfo = res.data
-        })
-    },
+
     logout() {
       removeToken()
       this.$router.replace({

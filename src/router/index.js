@@ -15,24 +15,8 @@ export default new Router({
         {
           path: '',
           component: () => import('@/views/home/default')
-        },
-        {
-          path: '/goods-list',
-          component: () => import('@/views/goods-manage/goods-list')
-        },
-        {
-          path: '/voucher-list',
-          component: () => import('@/views/voucher-manage/voucher-list')
-        },
-        {
-          path: '/address',
-          component: () => import('@/views/shopper-manage/address')
         }
       ]
     },
-    {
-      path: '/bind-shop',
-      component: () => import('../views/bind-shop')
-    }
   ]
 })

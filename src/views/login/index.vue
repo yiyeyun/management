@@ -1,10 +1,21 @@
 <template>
   <div class="login">
-    <div v-if="!codeIsValidate" class="code-invalid">二维码失效</div>
-    <img v-else :src="qrCode" class="img" alt="">
-    <div v-if="codeIsValidate" class="text">微信扫一扫登入</div>
-    <div v-else class="mt20">
-      <el-button type="warning" class="mt20" @click="getQrcode">刷新二维码</el-button>
+    <div class="form-box">
+      <div class="title mb30 mt20">登入</div>
+      <el-input
+        v-model="username"
+        placeholder="请输入用户名"
+      >
+        <i slot="prefix" class="el-input__icon el-icon-user" />
+      </el-input>
+      <el-input
+        v-model="password"
+        placeholder="请输入密码"
+        type="password"
+      >
+        <i slot="prefix" class="el-input__icon el-icon-lock" />
+      </el-input>
+      <el-button type="warning" @click="submit">提交</el-button>
     </div>
   </div>
 </template>
@@ -14,54 +25,43 @@ import {
   setToken
 } from '../../utils/auth'
 import {
-  getQrcode,
-  isLogin
+  validateNotNull
+} from '../../validate'
+import {
+  login
 } from '../../api/login'
+
 export default {
   name: 'Index',
   data() {
     return {
-      qrCode: '',
-      codeIsValidate: true,
-      loginInterval: null
+      username: '',
+      password: ''
     }
   },
   mounted() {
-    this.getQrcode()
-  },
-  destroyed() {
-    clearInterval(this.loginInterval)
+
   },
   methods: {
-    getQrcode() {
-      getQrcode().then(res => {
-        this.qrCode = res.data
-        this.codeIsValidate = true
-        this.isLoginInterval()
-        setTimeout(() => {
-          clearInterval(this.loginInterval)
-          this.codeIsValidate = false
-        }, 1000 * 60 * 5)
-      })
-    },
-    isLoginInterval() {
-      this.loginInterval = setInterval(() => {
-        isLogin()
-          .then(res => {
-            if (res) {
-              console.log(res)
-              clearInterval(this.loginInterval)
-              setToken(res.data.token)
-              if (res.data.status === 1) {
-                this.$router.replace({ path: '/bind-shop' })
-              } else {
-                this.$router.replace({ path: '/' })
-              }
-            }
-          })
-      }, 2000)
+    async submit() {
+      try {
+        await validateNotNull(this.username, '用户名不能为空')
+        await validateNotNull(this.password, '密码不能为空')
+        const result = await login({
+          username: this.username,
+          password: this.password
+        })
+        this.$message.success('登入成功')
+        setToken(result.data)
+        this.$router.push({
+          path: '/'
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
+
 }
 </script>
 
@@ -74,19 +74,21 @@ export default {
     height: 100%;
     background: @main-color;
   }
-  .img{
-    width: 200px;
-    height: 200px;
-  }
-  .code-invalid{
-      width: 200px;
-      height: 200px;
-      background: #fff;
-      text-align: center;
-      line-height: 200px;
-  }
-  .text{
-    margin-top: 20px;
-    color: #fff;
+.form-box{
+  width: 400px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 300px;
+  background: #fff;
+  border-radius: 10px;
+}
+  .title{
+    font-size: 28px;
+    font-weight: 600;
+    color: @main-color;
+    text-align: center;
   }
 </style>
