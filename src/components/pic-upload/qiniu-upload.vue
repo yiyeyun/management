@@ -41,7 +41,7 @@
 <script>
 import {
   getQiniuToken
-} from '../../api/product'
+} from '../../api/common'
 
 export default {
   props: {

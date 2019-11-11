@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="form-box">
-      <div class="title mb30 mt20">登入</div>
+      <div class="title mt20">登入</div>
       <el-input
         v-model="username"
         placeholder="请输入用户名"
@@ -35,8 +35,8 @@ export default {
   name: 'Index',
   data() {
     return {
-      username: '',
-      password: ''
+      username: '13968137471',
+      password: '111111'
     }
   },
   mounted() {
